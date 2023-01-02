@@ -32,8 +32,8 @@ type NewsListInterface = {
 export const News = () => {
   const [isLoading, setisLoading] = useState(false)
   const [newsList, setnewsList] = useState<NewsListInterface[]>([]);
-  const API_KEY = '73bfa4c7bc0b4cd4a5340aa39434d0ac';
-  const newsApiUrl = `https://newsapi.org/v2/everything?q=tesla&from=2022-11-30&sortBy=publishedAt&apiKey=${API_KEY}`;
+  const API_KEY = '36cd8cfcbbec4b98816d29ccd6024536';
+  const newsApiUrl = `https://newsapi.org/v2/everything?q=tesla&from=2022-12-02&sortBy=publishedAt&apiKey=${API_KEY}`;
   const RenderSearch = () => {
     return (
       <View>
@@ -62,6 +62,7 @@ export const News = () => {
     axios
       .get(newsApiUrl)
       .then(res => {
+       
         setisLoading(false)
 
         if (res.data?.status === 'ok') {
@@ -71,10 +72,9 @@ export const News = () => {
       })
       .catch(err => {
         setisLoading(false)
-
         if (err) {
           Alert.alert('Error', 'Unable to compelete request ',[
-            {"text": "Refresh","onPress": ()=> getNews()}
+            {"text": "Refresh","onPress": ()=> getNews()},
           ]);
         }
       });
@@ -83,6 +83,8 @@ export const News = () => {
   useEffect(() => {
     getNews();
   }, []);
+
+  
 
   const renderItem = (item: NewsListInterface) => {
     return (
