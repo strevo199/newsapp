@@ -26,7 +26,7 @@ type NewsListInterface = {
   url: string;
   urlToImage: string;
   content: string;
-  publishImage: string;
+  publishedAt: string;
 };
 
 export const News = () => {
@@ -87,6 +87,7 @@ export const News = () => {
   
 
   const renderItem = (item: NewsListInterface) => {
+    
     return (
       <Animated.View
         entering={FadeInUp.delay(200).duration(500)}
@@ -129,8 +130,11 @@ export const News = () => {
         </View>
         <View style={{flex: 1, padding:8, justifyContent:"space-between"}}>
           <View>
+          <View style={{marginBottom:4, flexDirection:"row", alignItems:"center", justifyContent:"space-between"}}>
 
-          <Text style={{color: 'black',marginBottom:4, textTransform:"capitalize", fontWeight:"500"}}>Author: {item.author ? `${item.author.substring(0,39)}`: "Stephen G"}</Text>
+          <Text style={{color: 'black',fontSize:13, textTransform:"capitalize", fontWeight:"500"}}>{item.author ? `${item.author.substring(0,39)}`: "Stephen G"}</Text>
+          <Text style={{color: 'black', fontSize:7, fontWeight:"500"}}>{item.publishedAt.split("T")[0]}</Text>
+          </View>
           <Text style={{color: '#999999', fontWeight:"600"}}>Title: {item.title.substring(0,70)}..</Text>
           </View>
         </View>
